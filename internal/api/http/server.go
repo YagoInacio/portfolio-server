@@ -11,7 +11,7 @@ func NewServer() *echo.Echo {
 	e := echo.New()
 
 	e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
-		Format: "method=${method}, uri=${uri}, status=${status}\n",
+		Format: "method=${method}, uri=${uri}, status=${status}, duration=${latency_human}\n",
 	}))
 	e.Use(middleware.Recover())
 
