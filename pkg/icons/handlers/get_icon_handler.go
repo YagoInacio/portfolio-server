@@ -19,9 +19,9 @@ func NewGetIconHandler(getIconUseCase usecases.GetIconUseCase) *GetIconHandler {
 
 func (h *GetIconHandler) Handler(c echo.Context) error {
 	iconName := c.Param("name")
-	path, err := h.GetIconUseCase.Execute(iconName)
+	file, err := h.GetIconUseCase.Execute(iconName)
 	if err != nil {
 		return c.String(http.StatusNotFound, err.Error())
 	}
-	return c.File(path)
+	return c.Blob(200, "image/png", file)
 }
