@@ -2,10 +2,10 @@ package routes
 
 import (
 	"github.com/labstack/echo/v4"
-	"github.com/yagoinacio/portfolio-server/internal/database/mongodb"
-	"github.com/yagoinacio/portfolio-server/pkg/technologies/adapters/http/handlers"
-	repositories "github.com/yagoinacio/portfolio-server/pkg/technologies/adapters/persistance/database"
-	usecases "github.com/yagoinacio/portfolio-server/pkg/technologies/usecases"
+	"github.com/yagoinacio/portfolio-server/internal/technologies/adapters/http/handlers"
+	repositories "github.com/yagoinacio/portfolio-server/internal/technologies/adapters/persistance/database"
+	usecases "github.com/yagoinacio/portfolio-server/internal/technologies/usecases"
+	"github.com/yagoinacio/portfolio-server/pkg/database/mongodb"
 )
 
 func SetupRoutes(e *echo.Group) {

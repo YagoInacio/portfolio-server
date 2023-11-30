@@ -1,6 +1,6 @@
 package repositories
 
-import domain "github.com/yagoinacio/portfolio-server/pkg/technologies/domain/entities"
+import domain "github.com/yagoinacio/portfolio-server/internal/technologies/domain/entities"
 
 type TechnologiesRepositoryInterface interface {
 	Save(technology *domain.Technology) error

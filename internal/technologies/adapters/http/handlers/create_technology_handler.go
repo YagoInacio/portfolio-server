@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
-	"github.com/yagoinacio/portfolio-server/pkg/technologies/usecases"
+	"github.com/yagoinacio/portfolio-server/internal/technologies/usecases"
 )
 
 type CreateTechnologyHandler struct {

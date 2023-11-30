@@ -5,8 +5,8 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	repositories "github.com/yagoinacio/portfolio-server/pkg/technologies/adapters/persistance/in_memory"
-	domain "github.com/yagoinacio/portfolio-server/pkg/technologies/domain/entities"
+	repositories "github.com/yagoinacio/portfolio-server/internal/technologies/adapters/persistance/in_memory"
+	domain "github.com/yagoinacio/portfolio-server/internal/technologies/domain/entities"
 )
 
 func TestShouldBeAbleToCreateTechnology(t *testing.T) {

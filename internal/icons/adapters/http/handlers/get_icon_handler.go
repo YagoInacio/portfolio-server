@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
-	"github.com/yagoinacio/portfolio-server/pkg/icons/usecases"
+	"github.com/yagoinacio/portfolio-server/internal/icons/usecases"
 )
 
 type GetIconHandler struct {

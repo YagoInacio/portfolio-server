@@ -3,7 +3,7 @@ package repositories
 import (
 	"context"
 
-	domain "github.com/yagoinacio/portfolio-server/pkg/technologies/domain/entities"
+	domain "github.com/yagoinacio/portfolio-server/internal/technologies/domain/entities"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"

@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/yagoinacio/portfolio-server/config"
-	"github.com/yagoinacio/portfolio-server/internal/api/http"
-	"github.com/yagoinacio/portfolio-server/internal/database/mongodb"
+	"github.com/yagoinacio/portfolio-server/pkg/api/http"
+	"github.com/yagoinacio/portfolio-server/pkg/database/mongodb"
 )
 
 func main() {

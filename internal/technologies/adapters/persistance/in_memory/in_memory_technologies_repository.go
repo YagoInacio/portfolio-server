@@ -3,7 +3,7 @@ package repositories
 import (
 	"errors"
 
-	domain "github.com/yagoinacio/portfolio-server/pkg/technologies/domain/entities"
+	domain "github.com/yagoinacio/portfolio-server/internal/technologies/domain/entities"
 )
 
 type InMemoryTechnologiesRepository struct{}

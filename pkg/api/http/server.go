@@ -3,8 +3,8 @@ package http
 import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	icon_routes "github.com/yagoinacio/portfolio-server/pkg/icons/adapters/http/routes"
-	tech_routes "github.com/yagoinacio/portfolio-server/pkg/technologies/adapters/http/routes"
+	icon_routes "github.com/yagoinacio/portfolio-server/internal/icons/adapters/http/routes"
+	tech_routes "github.com/yagoinacio/portfolio-server/internal/technologies/adapters/http/routes"
 )
 
 func NewServer() *echo.Echo {

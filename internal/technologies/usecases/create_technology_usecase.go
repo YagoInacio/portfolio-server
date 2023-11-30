@@ -3,8 +3,8 @@ package usecases
 import (
 	"errors"
 
-	technologies_domain "github.com/yagoinacio/portfolio-server/pkg/technologies/domain/entities"
-	"github.com/yagoinacio/portfolio-server/pkg/technologies/domain/repositories"
+	technologies_domain "github.com/yagoinacio/portfolio-server/internal/technologies/domain/entities"
+	"github.com/yagoinacio/portfolio-server/internal/technologies/domain/repositories"
 )
 
 type TechnologyInput struct {

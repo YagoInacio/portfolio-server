@@ -3,7 +3,7 @@ package usecases
 import (
 	"os"
 
-	file_storage "github.com/yagoinacio/portfolio-server/internal/file_storage/firebase"
+	file_storage "github.com/yagoinacio/portfolio-server/pkg/file_storage/firebase"
 )
 
 type GetIconUseCase struct{}
