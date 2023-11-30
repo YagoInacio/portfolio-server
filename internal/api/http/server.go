@@ -3,8 +3,7 @@ package http
 import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	icon_handlers "github.com/yagoinacio/portfolio-server/pkg/icons/handlers"
-	icon_usecases "github.com/yagoinacio/portfolio-server/pkg/icons/usecases"
+	icon_routes "github.com/yagoinacio/portfolio-server/pkg/icons/adapters/http/routes"
 	tech_routes "github.com/yagoinacio/portfolio-server/pkg/technologies/adapters/http/routes"
 )
 
@@ -17,13 +16,12 @@ func NewServer() *echo.Echo {
 	e.Use(middleware.Recover())
 
 	api := e.Group("/api")
+
 	technologies := api.Group("/technologies")
 	tech_routes.SetupRoutes(technologies)
 
-	uc := icon_usecases.GetIconUseCase{}
-
-	// add routes
-	e.GET("/icons/:name", icon_handlers.NewGetIconHandler(uc).Handler)
+	icons := api.Group("/icons")
+	icon_routes.SetupRoutes(icons)
 
 	return e
 }
