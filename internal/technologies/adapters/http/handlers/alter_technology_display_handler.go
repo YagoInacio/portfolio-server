@@ -17,6 +17,14 @@ func NewAlterTechnologyDisplayHandler(alterTechnologyDisplayUseCase usecases.Alt
 	}
 }
 
+// @Tags Technologies
+// @Router	/technologies/{id} [patch]
+// @Summary Alters technology display
+// @Description  This endpoint alters a technology's display parameter
+// @Produce      json
+// @Param id   path      string  true  "Technology Id"
+// @Param display query string true "display value to be modified to" Enums(true, false)
+// @Success      200  {object}  usecases.AlterTechnologyDisplayOutput
 func (h *AlterTechnologyDisplayHandler) Handler(c echo.Context) error {
 	inputId := c.Param("id")
 	inputDisplay := c.QueryParam("display")

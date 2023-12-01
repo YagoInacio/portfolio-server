@@ -22,6 +22,27 @@ const docTemplate = `{
     "basePath": "{{.BasePath}}",
     "paths": {
         "/technologies": {
+            "get": {
+                "description": "This endpoint lists all technologies that are marked as display: true",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Technologies"
+                ],
+                "summary": "List Technologies",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/usecases.ListTechnologiesOutput"
+                            }
+                        }
+                    }
+                }
+            },
             "post": {
                 "description": "This endpoint creates a new technology",
                 "consumes": [
@@ -33,7 +54,7 @@ const docTemplate = `{
                 "tags": [
                     "Technologies"
                 ],
-                "summary": "creates a new technology",
+                "summary": "Creates a new technology",
                 "parameters": [
                     {
                         "description": "creation attributes",
@@ -45,11 +66,92 @@ const docTemplate = `{
                         }
                     }
                 ],
-                "responses": {}
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/usecases.TechnologyOutput"
+                        }
+                    }
+                }
+            }
+        },
+        "/technologies/{id}": {
+            "patch": {
+                "description": "This endpoint alters a technology's display parameter",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Technologies"
+                ],
+                "summary": "Alters technology display",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Technology Id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "enum": [
+                            "true",
+                            "false"
+                        ],
+                        "type": "string",
+                        "description": "display value to be modified to",
+                        "name": "display",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/usecases.AlterTechnologyDisplayOutput"
+                        }
+                    }
+                }
             }
         }
     },
     "definitions": {
+        "usecases.AlterTechnologyDisplayOutput": {
+            "type": "object",
+            "properties": {
+                "display": {
+                    "type": "boolean"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "src": {
+                    "type": "string"
+                }
+            }
+        },
+        "usecases.ListTechnologiesOutput": {
+            "type": "object",
+            "properties": {
+                "display": {
+                    "type": "boolean"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "src": {
+                    "type": "string"
+                }
+            }
+        },
         "usecases.TechnologyInput": {
             "type": "object",
             "properties": {
@@ -67,6 +169,23 @@ const docTemplate = `{
                     "description": "tech icon file name",
                     "type": "string",
                     "example": "go.png"
+                }
+            }
+        },
+        "usecases.TechnologyOutput": {
+            "type": "object",
+            "properties": {
+                "display": {
+                    "type": "boolean"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "src": {
+                    "type": "string"
                 }
             }
         }

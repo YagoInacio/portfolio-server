@@ -17,6 +17,12 @@ func NewListTechnologiesHandler(listTechnologiesUseCase usecases.ListTechnologie
 	}
 }
 
+// @Tags Technologies
+// @Router	/technologies [get]
+// @Summary List Technologies
+// @Description  This endpoint lists all technologies that are marked as display: true
+// @Produce      json
+// @Success      200  {array}  usecases.ListTechnologiesOutput
 func (h *ListTechnologiesHandler) Handler(c echo.Context) error {
 	result, err := h.ListTechnologiesUseCase.Execute()
 	if err != nil {

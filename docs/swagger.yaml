@@ -1,5 +1,27 @@
 basePath: /api
 definitions:
+  usecases.AlterTechnologyDisplayOutput:
+    properties:
+      display:
+        type: boolean
+      id:
+        type: string
+      name:
+        type: string
+      src:
+        type: string
+    type: object
+  usecases.ListTechnologiesOutput:
+    properties:
+      display:
+        type: boolean
+      id:
+        type: string
+      name:
+        type: string
+      src:
+        type: string
+    type: object
   usecases.TechnologyInput:
     properties:
       display:
@@ -13,6 +35,17 @@ definitions:
       src:
         description: tech icon file name
         example: go.png
+        type: string
+    type: object
+  usecases.TechnologyOutput:
+    properties:
+      display:
+        type: boolean
+      id:
+        type: string
+      name:
+        type: string
+      src:
         type: string
     type: object
 info:
@@ -30,6 +63,21 @@ info:
   version: "1.0"
 paths:
   /technologies:
+    get:
+      description: 'This endpoint lists all technologies that are marked as display:
+        true'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/usecases.ListTechnologiesOutput'
+            type: array
+      summary: List Technologies
+      tags:
+      - Technologies
     post:
       consumes:
       - application/json
@@ -43,8 +91,39 @@ paths:
           $ref: '#/definitions/usecases.TechnologyInput'
       produces:
       - application/json
-      responses: {}
-      summary: creates a new technology
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/usecases.TechnologyOutput'
+      summary: Creates a new technology
+      tags:
+      - Technologies
+  /technologies/{id}:
+    patch:
+      description: This endpoint alters a technology's display parameter
+      parameters:
+      - description: Technology Id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: display value to be modified to
+        enum:
+        - "true"
+        - "false"
+        in: query
+        name: display
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/usecases.AlterTechnologyDisplayOutput'
+      summary: Alters technology display
       tags:
       - Technologies
 swagger: "2.0"
