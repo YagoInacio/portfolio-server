@@ -17,6 +17,13 @@ func NewCreateTechnologyHandler(createTechnologyUseCase usecases.CreateTechnolog
 	}
 }
 
+// @Tags Technologies
+// @Router	/technologies [post]
+// @Summary creates a new technology
+// @Description  This endpoint creates a new technology
+// @Accept       json
+// @Produce      json
+// @Param request body usecases.TechnologyInput true "creation attributes"
 func (h *CreateTechnologyHandler) Handler(c echo.Context) error {
 	request := new(usecases.TechnologyInput)
 	if err := c.Bind(request); err != nil {

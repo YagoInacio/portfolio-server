@@ -1,0 +1,50 @@
+basePath: /api
+definitions:
+  usecases.TechnologyInput:
+    properties:
+      display:
+        description: whether it will be displayed on the skills page
+        example: true
+        type: boolean
+      name:
+        description: tech name
+        example: Go
+        type: string
+      src:
+        description: tech icon file name
+        example: go.png
+        type: string
+    type: object
+info:
+  contact:
+    email: yagofaran@gmail.com
+    name: Yago Faran
+  description: This API is designed to improve the management of project and experience
+    information for your portfolio website, ensuring a seamless rendering and effortless
+    updating process. Additionally, it facilitates interaction with Firebase Storage,
+    allowing you to efficiently load and display icons and images, enhancing the overall
+    visual experience of your portfolio.
+  license:
+    name: MIT
+  title: Portfolio server
+  version: "1.0"
+paths:
+  /technologies:
+    post:
+      consumes:
+      - application/json
+      description: This endpoint creates a new technology
+      parameters:
+      - description: creation attributes
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/usecases.TechnologyInput'
+      produces:
+      - application/json
+      responses: {}
+      summary: creates a new technology
+      tags:
+      - Technologies
+swagger: "2.0"

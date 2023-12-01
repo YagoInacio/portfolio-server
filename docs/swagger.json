@@ -1,0 +1,67 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This API is designed to improve the management of project and experience information for your portfolio website, ensuring a seamless rendering and effortless updating process. Additionally, it facilitates interaction with Firebase Storage, allowing you to efficiently load and display icons and images, enhancing the overall visual experience of your portfolio.",
+        "title": "Portfolio server",
+        "contact": {
+            "name": "Yago Faran",
+            "email": "yagofaran@gmail.com"
+        },
+        "license": {
+            "name": "MIT"
+        },
+        "version": "1.0"
+    },
+    "basePath": "/api",
+    "paths": {
+        "/technologies": {
+            "post": {
+                "description": "This endpoint creates a new technology",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Technologies"
+                ],
+                "summary": "creates a new technology",
+                "parameters": [
+                    {
+                        "description": "creation attributes",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/usecases.TechnologyInput"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        }
+    },
+    "definitions": {
+        "usecases.TechnologyInput": {
+            "type": "object",
+            "properties": {
+                "display": {
+                    "description": "whether it will be displayed on the skills page",
+                    "type": "boolean",
+                    "example": true
+                },
+                "name": {
+                    "description": "tech name",
+                    "type": "string",
+                    "example": "Go"
+                },
+                "src": {
+                    "description": "tech icon file name",
+                    "type": "string",
+                    "example": "go.png"
+                }
+            }
+        }
+    }
+}

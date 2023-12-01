@@ -8,9 +8,9 @@ import (
 )
 
 type TechnologyInput struct {
-	Name    string `json:"name"`
-	Src     string `json:"src"`
-	Display bool   `json:"display"`
+	Name    string `json:"name" example:"Go"`      // tech name
+	Src     string `json:"src" example:"go.png"`   // tech icon file name
+	Display bool   `json:"display" example:"true"` // whether it will be displayed on the skills page
 }
 
 type TechnologyOutput struct {
