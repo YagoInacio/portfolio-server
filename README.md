@@ -45,7 +45,7 @@ This API is designed to improve the management of project and experience informa
 
 - [ ] Technologies:
   - [x] Create
-  - [ ] List
+  - [x] List
   - [ ] Disable
 
 - [ ] Experiences:
@@ -100,13 +100,15 @@ DATABASE_URL="mongodb+srv://[USERNAME]:[PASSWORD]@[HOST]/[DATABASE]?retryWrites=
 DATABASE_NAME=mongo_database
 ```
 
+You will also need to add your firebase credentials file to project's root folder with the name ```firebase_credentials.json```.
+
 #### 🎲 Running the application
 
 ```bash
 # Run the application in development mode
 $ go run ./cmd/portfolio/main.go
 
-# The server will start at port: 3333 - go to http://localhost:9000
+# The server will start at port: 9000 - go to http://localhost:9000
 ```
 
 <!-- You can try out the API using its swagger documentation on http://localhost:9000/swagger-ui/index.html -->
