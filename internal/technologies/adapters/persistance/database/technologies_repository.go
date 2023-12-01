@@ -30,7 +30,7 @@ func (r *TechnologiesRepository) Save(technology *domain.Technology) error {
 
 func (r *TechnologiesRepository) FindDisplayable() ([]domain.Technology, error) {
 	filter := bson.D{
-		primitive.E{Key: "display", Value: false},
+		primitive.E{Key: "display", Value: true},
 	}
 
 	cursor, err := r.collection.Find(context.TODO(), filter)
