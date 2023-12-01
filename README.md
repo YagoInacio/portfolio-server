@@ -111,7 +111,7 @@ $ go run ./cmd/portfolio/main.go
 # The server will start at port: 9000 - go to http://localhost:9000
 ```
 
-<!-- You can try out the API using its swagger documentation on http://localhost:9000/swagger-ui/index.html -->
+You can try out the API using its swagger documentation on http://localhost:9000/swagger-ui/index.html
 
 #### ✅ Running automated tests
 
