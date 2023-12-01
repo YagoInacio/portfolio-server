@@ -43,10 +43,10 @@ This API is designed to improve the management of project and experience informa
 
 ## ✨ Features
 
-- [ ] Technologies:
+- [x] Technologies:
   - [x] Create
   - [x] List
-  - [ ] Disable
+  - [x] Enable/Disable
 
 - [ ] Experiences:
   - [ ] Create
