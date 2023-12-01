@@ -17,4 +17,7 @@ func SetupRoutes(e *echo.Group) {
 
 	list := usecases.NewListTechnologiesUseCase(techRepository)
 	e.GET("", handlers.NewListTechnologiesHandler(*list).Handler)
+
+	alterDisplay := usecases.NewAlterTechnologyDisplayUseCase(techRepository)
+	e.PATCH("/:id", handlers.NewAlterTechnologyDisplayHandler(*alterDisplay).Handler)
 }
