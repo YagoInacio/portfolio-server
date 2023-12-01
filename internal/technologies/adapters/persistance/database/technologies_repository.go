@@ -60,8 +60,32 @@ func (r *TechnologiesRepository) FindByName(name string) (domain.Technology, err
 	return result, nil
 }
 
+func (r *TechnologiesRepository) FindByid(id string) (domain.Technology, error) {
+	idObject, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		return domain.Technology{}, err
+	}
+	filter := bson.D{
+		primitive.E{Key: "_id", Value: idObject},
+	}
+
+	var result domain.Technology
+	err = r.collection.FindOne(context.TODO(), filter).Decode(&result)
+	if err != nil {
+		return result, err
+	}
+
+	return result, nil
+}
+
 func (r *TechnologiesRepository) SetDisplay(id string, display bool) error {
-	_, err := r.collection.UpdateByID(context.TODO(), id, display)
+	idObject, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		return err
+	}
+	filter := bson.M{"_id": idObject}
+	update := bson.M{"$set": bson.M{"display": display}}
+	_, err = r.collection.UpdateOne(context.TODO(), filter, update)
 	if err != nil {
 		return err
 	}

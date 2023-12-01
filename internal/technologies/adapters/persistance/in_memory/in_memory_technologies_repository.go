@@ -49,6 +49,23 @@ func (r *InMemoryTechnologiesRepository) FindByName(name string) (domain.Technol
 	return technology, nil
 }
 
+func (r *InMemoryTechnologiesRepository) FindByid(id string) (domain.Technology, error) {
+	var technology domain.Technology
+
+	for _, tech := range Technologies {
+		if tech.ID.Hex() == id {
+			technology = tech
+			break
+		}
+	}
+
+	if technology == (domain.Technology{}) {
+		return technology, errors.New("technology not found")
+	}
+
+	return technology, nil
+}
+
 func (r *InMemoryTechnologiesRepository) SetDisplay(id string, display bool) error {
 	for i, tech := range Technologies {
 		if tech.ID.Hex() == id {
