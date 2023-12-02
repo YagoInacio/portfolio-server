@@ -17,4 +17,7 @@ func SetupRoutes(e *echo.Group) {
 
 	create := usecases.NewCreateExperienceUseCase(xpRepository, techRepository)
 	e.POST("", handlers.NewCreateExperienceHandler(*create).Handler)
+
+	list := usecases.NewListExperiencesUseCase(xpRepository)
+	e.GET("", handlers.NewListExperiencesHandler(*list).Handler)
 }

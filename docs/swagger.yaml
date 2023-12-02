@@ -1,5 +1,16 @@
 basePath: /api
 definitions:
+  technologies_domain.Technology:
+    properties:
+      display:
+        type: boolean
+      id:
+        type: string
+      name:
+        type: string
+      src:
+        type: string
+    type: object
   usecases.AlterTechnologyDisplayOutput:
     properties:
       display:
@@ -70,6 +81,33 @@ definitions:
           type: string
         type: array
     type: object
+  usecases.ListExperiencesOutput:
+    properties:
+      company:
+        example: Metacortex
+        type: string
+      id:
+        example: 6568ee3e7bbf5a6160f444f4
+        type: string
+      logo:
+        example: metacortex.svg
+        type: string
+      period:
+        $ref: '#/definitions/usecases.Period'
+      position:
+        example: Developer
+        type: string
+      summary:
+        example:
+        - Developed 3 apps
+        items:
+          type: string
+        type: array
+      techs:
+        items:
+          $ref: '#/definitions/technologies_domain.Technology'
+        type: array
+    type: object
   usecases.ListTechnologiesOutput:
     properties:
       display:
@@ -131,6 +169,20 @@ info:
   version: "1.0"
 paths:
   /experiences:
+    get:
+      description: This endpoint lists all registered experiences
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/usecases.ListExperiencesOutput'
+            type: array
+      summary: List Experiences
+      tags:
+      - Experiences
     post:
       consumes:
       - application/json

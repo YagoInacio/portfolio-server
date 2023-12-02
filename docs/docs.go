@@ -22,6 +22,27 @@ const docTemplate = `{
     "basePath": "{{.BasePath}}",
     "paths": {
         "/experiences": {
+            "get": {
+                "description": "This endpoint lists all registered experiences",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Experiences"
+                ],
+                "summary": "List Experiences",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/usecases.ListExperiencesOutput"
+                            }
+                        }
+                    }
+                }
+            },
             "post": {
                 "description": "This endpoint creates an experience",
                 "consumes": [
@@ -216,6 +237,23 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "technologies_domain.Technology": {
+            "type": "object",
+            "properties": {
+                "display": {
+                    "type": "boolean"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "src": {
+                    "type": "string"
+                }
+            }
+        },
         "usecases.AlterTechnologyDisplayOutput": {
             "type": "object",
             "properties": {
@@ -315,6 +353,45 @@ const docTemplate = `{
                     "example": [
                         "6568ed9d59e4487ccb66c757"
                     ]
+                }
+            }
+        },
+        "usecases.ListExperiencesOutput": {
+            "type": "object",
+            "properties": {
+                "company": {
+                    "type": "string",
+                    "example": "Metacortex"
+                },
+                "id": {
+                    "type": "string",
+                    "example": "6568ee3e7bbf5a6160f444f4"
+                },
+                "logo": {
+                    "type": "string",
+                    "example": "metacortex.svg"
+                },
+                "period": {
+                    "$ref": "#/definitions/usecases.Period"
+                },
+                "position": {
+                    "type": "string",
+                    "example": "Developer"
+                },
+                "summary": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "Developed 3 apps"
+                    ]
+                },
+                "techs": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/technologies_domain.Technology"
+                    }
                 }
             }
         },
