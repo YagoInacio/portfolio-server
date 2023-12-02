@@ -3,7 +3,7 @@ package http
 import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	icon_routes "github.com/yagoinacio/portfolio-server/internal/icons/adapters/http/routes"
+	image_routes "github.com/yagoinacio/portfolio-server/internal/images/adapters/http/routes"
 	tech_routes "github.com/yagoinacio/portfolio-server/internal/technologies/adapters/http/routes"
 
 	echoSwagger "github.com/swaggo/echo-swagger"
@@ -35,8 +35,8 @@ func NewServer() *echo.Echo {
 	technologies := api.Group("/technologies")
 	tech_routes.SetupRoutes(technologies)
 
-	icons := api.Group("/icons")
-	icon_routes.SetupRoutes(icons)
+	images := api.Group("/images")
+	image_routes.SetupRoutes(images)
 
 	return e
 }

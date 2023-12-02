@@ -62,6 +62,50 @@ info:
   title: Portfolio server
   version: "1.0"
 paths:
+  /images/{name}:
+    get:
+      description: This endpoint returns the image file by its name
+      parameters:
+      - description: File name
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - image/png
+      - image/jpeg
+      - image/svg+xml
+      - image/gif
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: file
+      summary: Get image file
+      tags:
+      - Images
+  /images/icons/{name}:
+    get:
+      description: This endpoint returns the icon file by its name
+      parameters:
+      - description: File name
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - image/png
+      - image/jpeg
+      - image/svg+xml
+      - image/gif
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: file
+      summary: Get icon file
+      tags:
+      - Images
   /technologies:
     get:
       description: 'This endpoint lists all technologies that are marked as display:

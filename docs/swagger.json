@@ -14,6 +14,70 @@
     },
     "basePath": "/api",
     "paths": {
+        "/images/icons/{name}": {
+            "get": {
+                "description": "This endpoint returns the icon file by its name",
+                "produces": [
+                    "image/png",
+                    "image/jpeg",
+                    "image/svg+xml",
+                    "image/gif"
+                ],
+                "tags": [
+                    "Images"
+                ],
+                "summary": "Get icon file",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "File name",
+                        "name": "name",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "file"
+                        }
+                    }
+                }
+            }
+        },
+        "/images/{name}": {
+            "get": {
+                "description": "This endpoint returns the image file by its name",
+                "produces": [
+                    "image/png",
+                    "image/jpeg",
+                    "image/svg+xml",
+                    "image/gif"
+                ],
+                "tags": [
+                    "Images"
+                ],
+                "summary": "Get image file",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "File name",
+                        "name": "name",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "file"
+                        }
+                    }
+                }
+            }
+        },
         "/technologies": {
             "get": {
                 "description": "This endpoint lists all technologies that are marked as display: true",
