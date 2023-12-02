@@ -59,8 +59,9 @@ This API is designed to improve the management of project and experience informa
   - [ ] Disable
   - [ ] Update
 
-- [ ] Icons:
-  - [x] Get
+- [x] Images:
+  - [x] Get Images
+  - [x] Get Icons
 
 ## 🚀 How it works
 
