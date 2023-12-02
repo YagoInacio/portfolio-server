@@ -154,6 +154,68 @@ definitions:
       src:
         type: string
     type: object
+  usecases.UpdateExperienceInput:
+    properties:
+      company:
+        example: Metacortex
+        type: string
+      end:
+        example: 10/2023
+        type: string
+      id:
+        example: 6568ed9d59e4487ccb66c757
+        type: string
+      logo:
+        example: metacortex.svg
+        type: string
+      position:
+        example: Developer
+        type: string
+      start:
+        example: 01/2023
+        type: string
+      summary:
+        example:
+        - Developed 3 apps
+        items:
+          type: string
+        type: array
+      techs:
+        example:
+        - 6568ed9d59e4487ccb66c757
+        items:
+          type: string
+        type: array
+    type: object
+  usecases.UpdateExperienceOutput:
+    properties:
+      company:
+        example: Metacortex
+        type: string
+      id:
+        example: 6568ee3e7bbf5a6160f444f4
+        type: string
+      logo:
+        example: metacortex.svg
+        type: string
+      period:
+        $ref: '#/definitions/usecases.Period'
+      position:
+        example: Developer
+        type: string
+      summary:
+        example:
+        - Developed 3 apps
+        items:
+          type: string
+        type: array
+      techs:
+        example:
+        - 6568ed9d59e4487ccb66c757
+        items:
+          type: string
+        type: array
+    type: object
 info:
   contact:
     email: yagofaran@gmail.com
@@ -181,6 +243,27 @@ paths:
               $ref: '#/definitions/usecases.ListExperiencesOutput'
             type: array
       summary: List Experiences
+      tags:
+      - Experiences
+    patch:
+      consumes:
+      - application/json
+      description: This endpoint can alter any experience field
+      parameters:
+      - description: creation attributes
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/usecases.UpdateExperienceInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/usecases.UpdateExperienceOutput'
+      summary: Updates experience
       tags:
       - Experiences
     post:

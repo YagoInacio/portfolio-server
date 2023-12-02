@@ -74,6 +74,38 @@ const docTemplate = `{
                         }
                     }
                 }
+            },
+            "patch": {
+                "description": "This endpoint can alter any experience field",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Experiences"
+                ],
+                "summary": "Updates experience",
+                "parameters": [
+                    {
+                        "description": "creation attributes",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/usecases.UpdateExperienceInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/usecases.UpdateExperienceOutput"
+                        }
+                    }
+                }
             }
         },
         "/images/icons/{name}": {
@@ -459,6 +491,95 @@ const docTemplate = `{
                 },
                 "src": {
                     "type": "string"
+                }
+            }
+        },
+        "usecases.UpdateExperienceInput": {
+            "type": "object",
+            "properties": {
+                "company": {
+                    "type": "string",
+                    "example": "Metacortex"
+                },
+                "end": {
+                    "type": "string",
+                    "example": "10/2023"
+                },
+                "id": {
+                    "type": "string",
+                    "example": "6568ed9d59e4487ccb66c757"
+                },
+                "logo": {
+                    "type": "string",
+                    "example": "metacortex.svg"
+                },
+                "position": {
+                    "type": "string",
+                    "example": "Developer"
+                },
+                "start": {
+                    "type": "string",
+                    "example": "01/2023"
+                },
+                "summary": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "Developed 3 apps"
+                    ]
+                },
+                "techs": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "6568ed9d59e4487ccb66c757"
+                    ]
+                }
+            }
+        },
+        "usecases.UpdateExperienceOutput": {
+            "type": "object",
+            "properties": {
+                "company": {
+                    "type": "string",
+                    "example": "Metacortex"
+                },
+                "id": {
+                    "type": "string",
+                    "example": "6568ee3e7bbf5a6160f444f4"
+                },
+                "logo": {
+                    "type": "string",
+                    "example": "metacortex.svg"
+                },
+                "period": {
+                    "$ref": "#/definitions/usecases.Period"
+                },
+                "position": {
+                    "type": "string",
+                    "example": "Developer"
+                },
+                "summary": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "Developed 3 apps"
+                    ]
+                },
+                "techs": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "6568ed9d59e4487ccb66c757"
+                    ]
                 }
             }
         }

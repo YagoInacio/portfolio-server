@@ -20,4 +20,7 @@ func SetupRoutes(e *echo.Group) {
 
 	list := usecases.NewListExperiencesUseCase(xpRepository)
 	e.GET("", handlers.NewListExperiencesHandler(*list).Handler)
+
+	update := usecases.NewUpdateExperienceUseCase(xpRepository, techRepository)
+	e.PATCH("", handlers.NewUpdateExperienceHandler(*update).Handler)
 }
