@@ -9,7 +9,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-type DatabaseExperience struct {
+type databaseExperience struct {
 	ID       primitive.ObjectID   `bson:"_id"`
 	Position string               `bson:"position"`
 	Company  string               `bson:"company"`
@@ -47,23 +47,16 @@ func (r *ExperiencesRepository) Save(experience *domain.Experience) error {
 }
 
 func (r *ExperiencesRepository) ListAll() ([]domain.Experience, error) {
-	pipeline := []bson.M{
-		{
-			"$unwind": "$techs",
-		},
-		{
-			"$lookup": bson.M{
-				"from":         "technologies",
-				"localField":   "techs",
-				"foreignField": "_id",
-				"as":           "technology",
-			},
-		},
-		{
-			"$unwind": "$technology",
-		},
+	lookupStage := bson.D{
+		{Key: "$lookup", Value: bson.D{
+			{Key: "from", Value: "technologies"},
+			{Key: "localField", Value: "techs"},
+			{Key: "foreignField", Value: "_id"},
+			{Key: "as", Value: "techs"},
+		}},
 	}
-	cursor, err := r.collection.Aggregate(context.TODO(), pipeline)
+
+	cursor, err := r.collection.Aggregate(context.TODO(), mongo.Pipeline{lookupStage})
 	if err != nil {
 		return nil, err
 	}
@@ -114,8 +107,8 @@ func (r *ExperiencesRepository) Update(experience *domain.Experience) error {
 	return nil
 }
 
-func (r *ExperiencesRepository) convertExperience(xp *domain.Experience, techs []primitive.ObjectID) *DatabaseExperience {
-	return &DatabaseExperience{
+func (r *ExperiencesRepository) convertExperience(xp *domain.Experience, techs []primitive.ObjectID) *databaseExperience {
+	return &databaseExperience{
 		ID:       xp.ID,
 		Position: xp.Position,
 		Company:  xp.Company,
