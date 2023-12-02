@@ -21,6 +21,40 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/experiences": {
+            "post": {
+                "description": "This endpoint creates an experience",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Experiences"
+                ],
+                "summary": "Creates an experience",
+                "parameters": [
+                    {
+                        "description": "creation attributes",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/usecases.CreateExperienceInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/usecases.CreateExperienceOutput"
+                        }
+                    }
+                }
+            }
+        },
         "/images/icons/{name}": {
             "get": {
                 "description": "This endpoint returns the icon file by its name",
@@ -199,6 +233,91 @@ const docTemplate = `{
                 }
             }
         },
+        "usecases.CreateExperienceInput": {
+            "type": "object",
+            "properties": {
+                "company": {
+                    "type": "string",
+                    "example": "Metacortex"
+                },
+                "end": {
+                    "type": "string",
+                    "example": "10/2023"
+                },
+                "logo": {
+                    "type": "string",
+                    "example": "metacortex.svg"
+                },
+                "position": {
+                    "type": "string",
+                    "example": "Developer"
+                },
+                "start": {
+                    "type": "string",
+                    "example": "01/2023"
+                },
+                "summary": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "Developed 3 apps"
+                    ]
+                },
+                "techs": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "6568ed9d59e4487ccb66c757"
+                    ]
+                }
+            }
+        },
+        "usecases.CreateExperienceOutput": {
+            "type": "object",
+            "properties": {
+                "company": {
+                    "type": "string",
+                    "example": "Metacortex"
+                },
+                "id": {
+                    "type": "string",
+                    "example": "6568ee3e7bbf5a6160f444f4"
+                },
+                "logo": {
+                    "type": "string",
+                    "example": "metacortex.svg"
+                },
+                "period": {
+                    "$ref": "#/definitions/usecases.Period"
+                },
+                "position": {
+                    "type": "string",
+                    "example": "Developer"
+                },
+                "summary": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "Developed 3 apps"
+                    ]
+                },
+                "techs": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "6568ed9d59e4487ccb66c757"
+                    ]
+                }
+            }
+        },
         "usecases.ListTechnologiesOutput": {
             "type": "object",
             "properties": {
@@ -213,6 +332,19 @@ const docTemplate = `{
                 },
                 "src": {
                     "type": "string"
+                }
+            }
+        },
+        "usecases.Period": {
+            "type": "object",
+            "properties": {
+                "end": {
+                    "type": "string",
+                    "example": "10/2023"
+                },
+                "start": {
+                    "type": "string",
+                    "example": "01/2023"
                 }
             }
         },

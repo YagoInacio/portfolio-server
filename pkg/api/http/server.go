@@ -3,6 +3,7 @@ package http
 import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	experience_routes "github.com/yagoinacio/portfolio-server/internal/experiences/adapters/http/routes"
 	image_routes "github.com/yagoinacio/portfolio-server/internal/images/adapters/http/routes"
 	tech_routes "github.com/yagoinacio/portfolio-server/internal/technologies/adapters/http/routes"
 
@@ -37,6 +38,9 @@ func NewServer() *echo.Echo {
 
 	images := api.Group("/images")
 	image_routes.SetupRoutes(images)
+
+	experiences := api.Group("/experiences")
+	experience_routes.SetupRoutes(experiences)
 
 	return e
 }

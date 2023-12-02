@@ -11,6 +11,65 @@ definitions:
       src:
         type: string
     type: object
+  usecases.CreateExperienceInput:
+    properties:
+      company:
+        example: Metacortex
+        type: string
+      end:
+        example: 10/2023
+        type: string
+      logo:
+        example: metacortex.svg
+        type: string
+      position:
+        example: Developer
+        type: string
+      start:
+        example: 01/2023
+        type: string
+      summary:
+        example:
+        - Developed 3 apps
+        items:
+          type: string
+        type: array
+      techs:
+        example:
+        - 6568ed9d59e4487ccb66c757
+        items:
+          type: string
+        type: array
+    type: object
+  usecases.CreateExperienceOutput:
+    properties:
+      company:
+        example: Metacortex
+        type: string
+      id:
+        example: 6568ee3e7bbf5a6160f444f4
+        type: string
+      logo:
+        example: metacortex.svg
+        type: string
+      period:
+        $ref: '#/definitions/usecases.Period'
+      position:
+        example: Developer
+        type: string
+      summary:
+        example:
+        - Developed 3 apps
+        items:
+          type: string
+        type: array
+      techs:
+        example:
+        - 6568ed9d59e4487ccb66c757
+        items:
+          type: string
+        type: array
+    type: object
   usecases.ListTechnologiesOutput:
     properties:
       display:
@@ -20,6 +79,15 @@ definitions:
       name:
         type: string
       src:
+        type: string
+    type: object
+  usecases.Period:
+    properties:
+      end:
+        example: 10/2023
+        type: string
+      start:
+        example: 01/2023
         type: string
     type: object
   usecases.TechnologyInput:
@@ -62,6 +130,28 @@ info:
   title: Portfolio server
   version: "1.0"
 paths:
+  /experiences:
+    post:
+      consumes:
+      - application/json
+      description: This endpoint creates an experience
+      parameters:
+      - description: creation attributes
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/usecases.CreateExperienceInput'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/usecases.CreateExperienceOutput'
+      summary: Creates an experience
+      tags:
+      - Experiences
   /images/{name}:
     get:
       description: This endpoint returns the image file by its name
