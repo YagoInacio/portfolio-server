@@ -4,10 +4,12 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"go.mongodb.org/mongo-driver/bson/primitive"
+	technologies_domain "github.com/yagoinacio/portfolio-server/internal/technologies/domain/entities"
 )
 
 func TestShouldBeAbleToCreateExperience(t *testing.T) {
+	tech1, _ := technologies_domain.NewTechnology("TECH_TEST_1", "TECH_1.PNG", true)
+	tech2, _ := technologies_domain.NewTechnology("TECH_TEST_2", "TECH_2.PNG", true)
 	experience, _ := NewExperience(
 		"POS_TEST",
 		"COMPANY_TEST",
@@ -15,7 +17,7 @@ func TestShouldBeAbleToCreateExperience(t *testing.T) {
 		"01/2023",
 		"",
 		[]string{"SUMMARY_TEST_1", "SUMMARY_TEST_2", "SUMMARY_TEST_3"},
-		[]primitive.ObjectID{primitive.NewObjectID(), primitive.NewObjectID()},
+		[]technologies_domain.Technology{*tech1, *tech2},
 	)
 
 	assert.NotEmpty(t, experience.ID)

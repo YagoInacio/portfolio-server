@@ -1,9 +1,12 @@
 package usecases
 
 import (
+	"errors"
+
 	experiences_domain "github.com/yagoinacio/portfolio-server/internal/experiences/domain/entities"
 	"github.com/yagoinacio/portfolio-server/internal/experiences/domain/repositories"
-	"go.mongodb.org/mongo-driver/bson/primitive"
+	technologies_domain "github.com/yagoinacio/portfolio-server/internal/technologies/domain/entities"
+	tech_repositories "github.com/yagoinacio/portfolio-server/internal/technologies/domain/repositories"
 )
 
 type CreateExperienceInput struct {
@@ -33,23 +36,28 @@ type CreateExperienceOutput struct {
 
 type CreateExperienceUseCase struct {
 	ExperiencesRepository repositories.ExperiencesRepositoryInterface
+	TechnologyRepository  tech_repositories.TechnologiesRepositoryInterface
 }
 
-func NewCreateExperienceUseCase(experiencesRepository repositories.ExperiencesRepositoryInterface) *CreateExperienceUseCase {
+func NewCreateExperienceUseCase(
+	experiencesRepository repositories.ExperiencesRepositoryInterface,
+	technologyRepository tech_repositories.TechnologiesRepositoryInterface,
+) *CreateExperienceUseCase {
 	return &CreateExperienceUseCase{
 		ExperiencesRepository: experiencesRepository,
+		TechnologyRepository:  technologyRepository,
 	}
 }
 
 func (u *CreateExperienceUseCase) Execute(input CreateExperienceInput) (*CreateExperienceOutput, error) {
-	var techs []primitive.ObjectID
+	var techs []technologies_domain.Technology
 
 	for _, tech := range input.Techs {
-		techId, err := primitive.ObjectIDFromHex(tech)
+		technology, err := u.TechnologyRepository.FindByid(tech)
 		if err != nil {
-			return nil, err
+			return nil, errors.New("technology not found")
 		}
-		techs = append(techs, techId)
+		techs = append(techs, technology)
 	}
 
 	xp, err := experiences_domain.NewExperience(
@@ -73,7 +81,7 @@ func (u *CreateExperienceUseCase) Execute(input CreateExperienceInput) (*CreateE
 	var insertedTechs []string
 
 	for _, tech := range xp.Techs {
-		insertedTechs = append(insertedTechs, tech.Hex())
+		insertedTechs = append(insertedTechs, tech.ID.Hex())
 	}
 
 	return &CreateExperienceOutput{

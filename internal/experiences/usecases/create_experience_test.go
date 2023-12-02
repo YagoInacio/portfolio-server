@@ -6,11 +6,28 @@ import (
 	"github.com/stretchr/testify/assert"
 	repositories "github.com/yagoinacio/portfolio-server/internal/experiences/adapters/persistance/in_memory"
 	domain "github.com/yagoinacio/portfolio-server/internal/experiences/domain/entities"
+	tech_repositories "github.com/yagoinacio/portfolio-server/internal/technologies/adapters/persistance/in_memory"
+	technologies_domain "github.com/yagoinacio/portfolio-server/internal/technologies/domain/entities"
 )
 
 func TestShouldBeAbleToCreateExperience(t *testing.T) {
 	xpRepo := repositories.NewInMemoryExperiencesRepository()
-	createExperienceUseCase := NewCreateExperienceUseCase(xpRepo)
+	techRepo := tech_repositories.NewInMemoryTechnologiesRepository()
+	createExperienceUseCase := NewCreateExperienceUseCase(xpRepo, techRepo)
+
+	tech1, _ := technologies_domain.NewTechnology(
+		"TECH_1",
+		"TECH_1.png",
+		true,
+	)
+	tech2, _ := technologies_domain.NewTechnology(
+		"TECH_2",
+		"TECH_2.png",
+		true,
+	)
+
+	techRepo.Save(tech1)
+	techRepo.Save(tech2)
 
 	input := CreateExperienceInput{
 		Position: "POS_TEST",
@@ -19,7 +36,7 @@ func TestShouldBeAbleToCreateExperience(t *testing.T) {
 		Start:    "01/2020",
 		End:      "01/2022",
 		Summary:  []string{"SUM_1", "SUM_2", "SUM_3"},
-		Techs:    []string{"6568ed9d59e4487ccb66c757", "6568ee3e7bbf5a6160f444f4"},
+		Techs:    []string{tech1.ID.Hex(), tech2.ID.Hex()},
 	}
 
 	result, _ := createExperienceUseCase.Execute(input)
@@ -41,7 +58,8 @@ func TestShouldBeAbleToCreateExperience(t *testing.T) {
 
 func TestShouldNotBeAbleToCreateExperienceWithInvalidTechId(t *testing.T) {
 	xpRepo := repositories.NewInMemoryExperiencesRepository()
-	createExperienceUseCase := NewCreateExperienceUseCase(xpRepo)
+	techRepo := tech_repositories.NewInMemoryTechnologiesRepository()
+	createExperienceUseCase := NewCreateExperienceUseCase(xpRepo, techRepo)
 
 	input := CreateExperienceInput{
 		Position: "POS_TEST",
@@ -55,5 +73,5 @@ func TestShouldNotBeAbleToCreateExperienceWithInvalidTechId(t *testing.T) {
 
 	_, err := createExperienceUseCase.Execute(input)
 
-	assert.EqualError(t, err, "the provided hex string is not a valid ObjectID")
+	assert.EqualError(t, err, "technology not found")
 }

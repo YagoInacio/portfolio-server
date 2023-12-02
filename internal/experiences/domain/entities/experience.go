@@ -3,6 +3,7 @@ package experiences_domain
 import (
 	"errors"
 
+	technologies_domain "github.com/yagoinacio/portfolio-server/internal/technologies/domain/entities"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -12,13 +13,13 @@ type Period struct {
 }
 
 type Experience struct {
-	ID       primitive.ObjectID   `bson:"_id"`
-	Position string               `bson:"position"`
-	Company  string               `bson:"company"`
-	Logo     string               `bson:"logo"`
-	Period   Period               `bson:"period"`
-	Summary  []string             `bson:"summary"`
-	Techs    []primitive.ObjectID `bson:"techs"`
+	ID       primitive.ObjectID               `bson:"_id"`
+	Position string                           `bson:"position"`
+	Company  string                           `bson:"company"`
+	Logo     string                           `bson:"logo"`
+	Period   Period                           `bson:"period"`
+	Summary  []string                         `bson:"summary"`
+	Techs    []technologies_domain.Technology `bson:"techs"`
 }
 
 func NewExperience(
@@ -28,7 +29,7 @@ func NewExperience(
 	start string,
 	end string,
 	summary []string,
-	techs []primitive.ObjectID,
+	techs []technologies_domain.Technology,
 ) (*Experience, error) {
 	experience := &Experience{
 		ID:       primitive.NewObjectID(),

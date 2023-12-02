@@ -9,6 +9,16 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
+type DatabaseExperience struct {
+	ID       primitive.ObjectID   `bson:"_id"`
+	Position string               `bson:"position"`
+	Company  string               `bson:"company"`
+	Logo     string               `bson:"logo"`
+	Period   domain.Period        `bson:"period"`
+	Summary  []string             `bson:"summary"`
+	Techs    []primitive.ObjectID `bson:"techs"`
+}
+
 type ExperiencesRepository struct {
 	collection *mongo.Collection
 }
@@ -20,7 +30,15 @@ func NewExperiencesRepository(coll *mongo.Collection) *ExperiencesRepository {
 }
 
 func (r *ExperiencesRepository) Save(experience *domain.Experience) error {
-	_, err := r.collection.InsertOne(context.TODO(), experience)
+	var techs []primitive.ObjectID
+
+	for _, tech := range experience.Techs {
+		techs = append(techs, tech.ID)
+	}
+
+	experienceToInsert := r.convertExperience(experience, techs)
+
+	_, err := r.collection.InsertOne(context.TODO(), experienceToInsert)
 	if err != nil {
 		return err
 	}
@@ -29,8 +47,23 @@ func (r *ExperiencesRepository) Save(experience *domain.Experience) error {
 }
 
 func (r *ExperiencesRepository) ListAll() ([]domain.Experience, error) {
-	filter := bson.D{}
-	cursor, err := r.collection.Find(context.TODO(), filter)
+	pipeline := []bson.M{
+		{
+			"$unwind": "$techs",
+		},
+		{
+			"$lookup": bson.M{
+				"from":         "technologies",
+				"localField":   "techs",
+				"foreignField": "_id",
+				"as":           "technology",
+			},
+		},
+		{
+			"$unwind": "$technology",
+		},
+	}
+	cursor, err := r.collection.Aggregate(context.TODO(), pipeline)
 	if err != nil {
 		return nil, err
 	}
@@ -62,8 +95,16 @@ func (r *ExperiencesRepository) FindById(id string) (domain.Experience, error) {
 }
 
 func (r *ExperiencesRepository) Update(experience *domain.Experience) error {
+	var techs []primitive.ObjectID
+
+	for _, tech := range experience.Techs {
+		techs = append(techs, tech.ID)
+	}
+
+	experienceToUpdate := r.convertExperience(experience, techs)
+
 	filter := bson.M{"_id": experience.ID}
-	update := bson.M{"$set": experience}
+	update := bson.M{"$set": experienceToUpdate}
 
 	_, err := r.collection.UpdateOne(context.TODO(), filter, update)
 	if err != nil {
@@ -71,4 +112,16 @@ func (r *ExperiencesRepository) Update(experience *domain.Experience) error {
 	}
 
 	return nil
+}
+
+func (r *ExperiencesRepository) convertExperience(xp *domain.Experience, techs []primitive.ObjectID) *DatabaseExperience {
+	return &DatabaseExperience{
+		ID:       xp.ID,
+		Position: xp.Position,
+		Company:  xp.Company,
+		Logo:     xp.Logo,
+		Period:   xp.Period,
+		Summary:  xp.Summary,
+		Techs:    techs,
+	}
 }
