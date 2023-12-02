@@ -50,7 +50,7 @@ This API is designed to improve the management of project and experience informa
 
 - [ ] Experiences:
   - [x] Create
-  - [ ] List
+  - [x] List
   - [ ] Update
 
 - [ ] Projects
