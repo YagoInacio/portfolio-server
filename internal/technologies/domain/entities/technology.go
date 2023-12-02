@@ -7,10 +7,10 @@ import (
 )
 
 type Technology struct {
-	ID      primitive.ObjectID `bson:"_id"`
-	Name    string             `bson:"name"`
-	Src     string             `bson:"src"`
-	Display bool               `bson:"display"`
+	ID      primitive.ObjectID `bson:"_id" json:"id"`
+	Name    string             `bson:"name" json:"name"`
+	Src     string             `bson:"src" json:"src"`
+	Display bool               `bson:"display" json:"display"`
 }
 
 func NewTechnology(name string, src string, display bool) (*Technology, error) {
