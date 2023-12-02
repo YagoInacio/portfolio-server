@@ -1,7 +1,6 @@
 package usecases
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -55,8 +54,6 @@ func TestShouldNotBeAbleToCreateExperienceWithInvalidTechId(t *testing.T) {
 	}
 
 	_, err := createExperienceUseCase.Execute(input)
-
-	fmt.Println(err)
 
 	assert.EqualError(t, err, "the provided hex string is not a valid ObjectID")
 }

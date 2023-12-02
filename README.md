@@ -49,7 +49,7 @@ This API is designed to improve the management of project and experience informa
   - [x] Enable/Disable
 
 - [ ] Experiences:
-  - [ ] Create
+  - [x] Create
   - [ ] List
   - [ ] Update
 
