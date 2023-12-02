@@ -29,7 +29,7 @@ func (repo *InMemoryExperiencesRepository) FindById(id string) (domain.Experienc
 
 	for _, xp := range Experiences {
 		if xp.ID.Hex() == id {
-			*experience = xp
+			experience = &xp
 			break
 		}
 	}

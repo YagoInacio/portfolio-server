@@ -2,6 +2,7 @@ package repositories
 
 import (
 	"context"
+	"fmt"
 
 	domain "github.com/yagoinacio/portfolio-server/internal/experiences/domain/entities"
 	"go.mongodb.org/mongo-driver/bson"
@@ -74,14 +75,31 @@ func (r *ExperiencesRepository) FindById(id string) (domain.Experience, error) {
 	if err != nil {
 		return domain.Experience{}, err
 	}
-	filter := bson.D{
-		primitive.E{Key: "_id", Value: idObject},
+	lookupStage := bson.D{
+		{Key: "$lookup", Value: bson.D{
+			{Key: "from", Value: "technologies"},
+			{Key: "localField", Value: "techs"},
+			{Key: "foreignField", Value: "_id"},
+			{Key: "as", Value: "techs"},
+		}},
+	}
+	matchStage := bson.D{
+		{Key: "$match", Value: bson.D{{Key: "_id", Value: idObject}}},
 	}
 
 	var result domain.Experience
-	err = r.collection.FindOne(context.TODO(), filter).Decode(&result)
+	cursor, err := r.collection.Aggregate(context.TODO(), mongo.Pipeline{lookupStage, matchStage})
 	if err != nil {
+		fmt.Println(err)
 		return result, err
+	}
+
+	if cursor.Next(context.TODO()) {
+		err := cursor.Decode(&result)
+		if err != nil {
+			fmt.Println(err)
+			return result, err
+		}
 	}
 
 	return result, nil
