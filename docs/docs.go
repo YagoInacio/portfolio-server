@@ -89,7 +89,7 @@ const docTemplate = `{
                 "summary": "Updates experience",
                 "parameters": [
                     {
-                        "description": "creation attributes",
+                        "description": "update attributes",
                         "name": "request",
                         "in": "body",
                         "required": true,
@@ -222,6 +222,38 @@ const docTemplate = `{
                         "description": "Created",
                         "schema": {
                             "$ref": "#/definitions/usecases.CreateProjectOutput"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "This endpoint can alter any project field",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Updates project",
+                "parameters": [
+                    {
+                        "description": "update attributes",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/usecases.UpdateProjectInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/usecases.UpdateProjectOutput"
                         }
                     }
                 }
@@ -729,6 +761,72 @@ const docTemplate = `{
                     "example": [
                         "6568ed9d59e4487ccb66c757"
                     ]
+                }
+            }
+        },
+        "usecases.UpdateProjectInput": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "lets the user register projects"
+                    ]
+                },
+                "id": {
+                    "type": "string",
+                    "example": "6568ed9d59e4487ccb66c757"
+                },
+                "techs": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "6568ed9d59e4487ccb66c757"
+                    ]
+                },
+                "title": {
+                    "type": "string",
+                    "example": "Portfolio App"
+                }
+            }
+        },
+        "usecases.UpdateProjectOutput": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "lets the user register projects"
+                    ]
+                },
+                "display": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "id": {
+                    "type": "string",
+                    "example": "6568ed9d59e4487ccb66c757"
+                },
+                "techs": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "6568ed9d59e4487ccb66c757"
+                    ]
+                },
+                "title": {
+                    "type": "string",
+                    "example": "Portfolio App"
                 }
             }
         }

@@ -57,7 +57,7 @@ This API is designed to improve the management of project and experience informa
   - [x] Create
   - [x] List
   - [ ] Disable
-  - [ ] Update
+  - [x] Update
 
 - [x] Images:
   - [x] Get Images

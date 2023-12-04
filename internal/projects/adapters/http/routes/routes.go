@@ -20,4 +20,7 @@ func SetupRoutes(e *echo.Group) {
 
 	list := usecases.NewListProjectsUseCase(projectsRepository)
 	e.GET("", handlers.NewListProjectsHandler(*list).Handler)
+
+	update := usecases.NewUpdateProjectUseCase(projectsRepository, techRepository)
+	e.PATCH("", handlers.NewUpdateProjectHandler(*update).Handler)
 }

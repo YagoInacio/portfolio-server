@@ -23,7 +23,7 @@ func NewUpdateExperienceHandler(updateExperienceUseCase usecases.UpdateExperienc
 // @Description  This endpoint can alter any experience field
 // @Accept       json
 // @Produce      json
-// @Param request body usecases.UpdateExperienceInput true "creation attributes"
+// @Param request body usecases.UpdateExperienceInput true "update attributes"
 // @Success      200  {object}  usecases.UpdateExperienceOutput
 func (h *UpdateExperienceHandler) Handler(c echo.Context) error {
 	request := new(usecases.UpdateExperienceInput)

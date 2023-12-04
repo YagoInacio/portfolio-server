@@ -280,6 +280,51 @@ definitions:
           type: string
         type: array
     type: object
+  usecases.UpdateProjectInput:
+    properties:
+      description:
+        example:
+        - lets the user register projects
+        items:
+          type: string
+        type: array
+      id:
+        example: 6568ed9d59e4487ccb66c757
+        type: string
+      techs:
+        example:
+        - 6568ed9d59e4487ccb66c757
+        items:
+          type: string
+        type: array
+      title:
+        example: Portfolio App
+        type: string
+    type: object
+  usecases.UpdateProjectOutput:
+    properties:
+      description:
+        example:
+        - lets the user register projects
+        items:
+          type: string
+        type: array
+      display:
+        example: true
+        type: boolean
+      id:
+        example: 6568ed9d59e4487ccb66c757
+        type: string
+      techs:
+        example:
+        - 6568ed9d59e4487ccb66c757
+        items:
+          type: string
+        type: array
+      title:
+        example: Portfolio App
+        type: string
+    type: object
 info:
   contact:
     email: yagofaran@gmail.com
@@ -314,7 +359,7 @@ paths:
       - application/json
       description: This endpoint can alter any experience field
       parameters:
-      - description: creation attributes
+      - description: update attributes
         in: body
         name: request
         required: true
@@ -408,6 +453,27 @@ paths:
               $ref: '#/definitions/usecases.ListProjectsOutput'
             type: array
       summary: List projects
+      tags:
+      - Projects
+    patch:
+      consumes:
+      - application/json
+      description: This endpoint can alter any project field
+      parameters:
+      - description: update attributes
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/usecases.UpdateProjectInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/usecases.UpdateProjectOutput'
+      summary: Updates project
       tags:
       - Projects
     post:
