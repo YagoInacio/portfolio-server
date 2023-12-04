@@ -49,7 +49,7 @@ func DownloadFile(w io.Writer, bucket, object string, destFileName string) error
 
 func DownloadFileIntoMemory(w io.Writer, bucket, object string) ([]byte, error) {
 	ctx := context.Background()
-	client, err := storage.NewClient(ctx, option.WithCredentialsFile("./firebase-credentials.json"))
+	client, err := storage.NewClient(ctx, option.WithCredentialsFile("./credentials/firebase-credentials.json"))
 	if err != nil {
 		return nil, fmt.Errorf("storage.NewClient: %w", err)
 	}

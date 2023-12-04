@@ -1,6 +1,8 @@
 package config
 
-import "github.com/spf13/viper"
+import (
+	"github.com/spf13/viper"
+)
 
 var cfg *config
 
@@ -24,14 +26,11 @@ func init() {
 }
 
 func LoadConfig() error {
-	viper.SetConfigFile(".env")
-	viper.AddConfigPath(".")
+	viper.SetConfigFile("credentials/.env")
 
 	err := viper.ReadInConfig()
 	if err != nil {
-		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
-			return err
-		}
+		return err
 	}
 
 	cfg = new(config)

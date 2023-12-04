@@ -90,18 +90,20 @@ $ go mod tidy
 
 To be able to run the application you need to set up the environment variables.
 
-For that, create the file ```.env``` on the project's root folder.
+For that, create the subfolder ```credentials``` on the project's root folder.
 
-You can follow the example bellow:
+On the ```credentials``` folder, create the file ```.env```. You can follow the example bellow:
 
 ```bash
 # db.env.properties:
 API_PORT=9000
 DATABASE_URL="mongodb+srv://[USERNAME]:[PASSWORD]@[HOST]/[DATABASE]?retryWrites=true&w=majority"
 DATABASE_NAME=mongo_database
+
+#  make sure to replace [USERNAME], [PASSWORD], [HOST], and [DATABASE] with actual values
 ```
 
-You will also need to add your firebase credentials file to project's root folder with the name ```firebase_credentials.json```.
+You will also need to add your firebase credentials file to the ```credentials``` folder with the name ```firebase_credentials.json```.
 
 #### 🎲 Running the application
 
