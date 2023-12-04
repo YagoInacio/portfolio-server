@@ -5,6 +5,7 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 	experience_routes "github.com/yagoinacio/portfolio-server/internal/experiences/adapters/http/routes"
 	image_routes "github.com/yagoinacio/portfolio-server/internal/images/adapters/http/routes"
+	project_routes "github.com/yagoinacio/portfolio-server/internal/projects/adapters/http/routes"
 	tech_routes "github.com/yagoinacio/portfolio-server/internal/technologies/adapters/http/routes"
 
 	echoSwagger "github.com/swaggo/echo-swagger"
@@ -41,6 +42,9 @@ func NewServer() *echo.Echo {
 
 	experiences := api.Group("/experiences")
 	experience_routes.SetupRoutes(experiences)
+
+	projects := api.Group("/projects")
+	project_routes.SetupRoutes(projects)
 
 	return e
 }

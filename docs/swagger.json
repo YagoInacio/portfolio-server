@@ -165,6 +165,40 @@
                 }
             }
         },
+        "/projects": {
+            "post": {
+                "description": "This endpoint creates a project",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Creates a project",
+                "parameters": [
+                    {
+                        "description": "creation attributes",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/usecases.CreateProjectInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/usecases.CreateProjectOutput"
+                        }
+                    }
+                }
+            }
+        },
         "/technologies": {
             "get": {
                 "description": "This endpoint lists all technologies that are marked as display: true",
@@ -378,6 +412,68 @@
                     "example": [
                         "6568ed9d59e4487ccb66c757"
                     ]
+                }
+            }
+        },
+        "usecases.CreateProjectInput": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "lets the user register projects"
+                    ]
+                },
+                "techs": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "6568ed9d59e4487ccb66c757"
+                    ]
+                },
+                "title": {
+                    "type": "string",
+                    "example": "Portfolio App"
+                }
+            }
+        },
+        "usecases.CreateProjectOutput": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "lets the user register projects"
+                    ]
+                },
+                "display": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "id": {
+                    "type": "string",
+                    "example": "6568ee3e7bbf5a6160f444f4"
+                },
+                "techs": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "6568ed9d59e4487ccb66c757"
+                    ]
+                },
+                "title": {
+                    "type": "string",
+                    "example": "Portfolio App"
                 }
             }
         },

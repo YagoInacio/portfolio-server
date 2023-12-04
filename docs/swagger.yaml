@@ -81,6 +81,48 @@ definitions:
           type: string
         type: array
     type: object
+  usecases.CreateProjectInput:
+    properties:
+      description:
+        example:
+        - lets the user register projects
+        items:
+          type: string
+        type: array
+      techs:
+        example:
+        - 6568ed9d59e4487ccb66c757
+        items:
+          type: string
+        type: array
+      title:
+        example: Portfolio App
+        type: string
+    type: object
+  usecases.CreateProjectOutput:
+    properties:
+      description:
+        example:
+        - lets the user register projects
+        items:
+          type: string
+        type: array
+      display:
+        example: true
+        type: boolean
+      id:
+        example: 6568ee3e7bbf5a6160f444f4
+        type: string
+      techs:
+        example:
+        - 6568ed9d59e4487ccb66c757
+        items:
+          type: string
+        type: array
+      title:
+        example: Portfolio App
+        type: string
+    type: object
   usecases.ListExperiencesOutput:
     properties:
       company:
@@ -331,6 +373,28 @@ paths:
       summary: Get icon file
       tags:
       - Images
+  /projects:
+    post:
+      consumes:
+      - application/json
+      description: This endpoint creates a project
+      parameters:
+      - description: creation attributes
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/usecases.CreateProjectInput'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/usecases.CreateProjectOutput'
+      summary: Creates a project
+      tags:
+      - Projects
   /technologies:
     get:
       description: 'This endpoint lists all technologies that are marked as display:
