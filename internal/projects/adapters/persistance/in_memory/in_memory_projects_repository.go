@@ -20,7 +20,7 @@ func (repo *InMemoryProjectsRepository) Save(project *domain.Project) error {
 	return nil
 }
 
-func (r *InMemoryProjectsRepository) FindDisplayable() ([]domain.Project, error) {
+func (r *InMemoryProjectsRepository) ListDisplayable() ([]domain.Project, error) {
 	var displayable []domain.Project
 
 	for _, project := range Projects {
