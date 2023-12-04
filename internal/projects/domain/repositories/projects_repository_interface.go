@@ -6,5 +6,5 @@ type ProjectsRepositoryInterface interface {
 	Save(project *domain.Project) error
 	ListDisplayable() ([]domain.Project, error)
 	FindById(id string) (domain.Project, error)
-	Update(experience *domain.Project) error
+	Update(project *domain.Project) error
 }
