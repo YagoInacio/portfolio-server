@@ -1,0 +1,10 @@
+version: '3.9'
+
+services:
+  portfolio-server:
+    build: .
+    container_name: portfolio-server
+    ports:
+    - 9000:9000
+    volumes:
+    - ./credentials:/credentials
