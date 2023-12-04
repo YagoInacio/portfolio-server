@@ -53,10 +53,10 @@ This API is designed to improve the management of project and experience informa
   - [x] List
   - [x] Update
 
-- [ ] Projects
+- [x] Projects
   - [x] Create
   - [x] List
-  - [ ] Disable
+  - [x] Enable/Disable
   - [x] Update
 
 - [x] Images:

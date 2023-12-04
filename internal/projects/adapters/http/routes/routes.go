@@ -23,4 +23,7 @@ func SetupRoutes(e *echo.Group) {
 
 	update := usecases.NewUpdateProjectUseCase(projectsRepository, techRepository)
 	e.PATCH("", handlers.NewUpdateProjectHandler(*update).Handler)
+
+	alterDisplay := usecases.NewAlterProjectDisplayUseCase(projectsRepository)
+	e.PATCH("/display/:id", handlers.NewAlterProjectDisplayHandler(*alterDisplay).Handler)
 }

@@ -11,6 +11,30 @@ definitions:
       src:
         type: string
     type: object
+  usecases.AlterProjectDisplayOutput:
+    properties:
+      description:
+        example:
+        - lets the user register projects
+        items:
+          type: string
+        type: array
+      display:
+        example: true
+        type: boolean
+      id:
+        example: 6568ed9d59e4487ccb66c757
+        type: string
+      techs:
+        example:
+        - 6568ed9d59e4487ccb66c757
+        items:
+          type: string
+        type: array
+      title:
+        example: Portfolio App
+        type: string
+    type: object
   usecases.AlterTechnologyDisplayOutput:
     properties:
       display:
@@ -495,6 +519,33 @@ paths:
           schema:
             $ref: '#/definitions/usecases.CreateProjectOutput'
       summary: Creates a project
+      tags:
+      - Projects
+  /projects/display/{id}:
+    patch:
+      description: This endpoint alters a project's display parameter
+      parameters:
+      - description: Project Id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: display value to be modified to
+        enum:
+        - "true"
+        - "false"
+        in: query
+        name: display
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/usecases.AlterProjectDisplayOutput'
+      summary: Alters project display
       tags:
       - Projects
   /technologies:
