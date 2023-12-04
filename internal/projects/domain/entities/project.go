@@ -12,6 +12,7 @@ type Project struct {
 	Title       string                           `bson:"title" json:"title"`
 	Description []string                         `bson:"description" json:"description"`
 	Techs       []technologies_domain.Technology `bson:"techs"`
+	Display     bool                             `bson:"display" json:"display"`
 }
 
 func NewProject(
@@ -24,6 +25,7 @@ func NewProject(
 		Title:       title,
 		Description: description,
 		Techs:       techs,
+		Display:     true,
 	}
 
 	err := project.Validate()
