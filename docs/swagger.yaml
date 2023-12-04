@@ -150,6 +150,28 @@ definitions:
           $ref: '#/definitions/technologies_domain.Technology'
         type: array
     type: object
+  usecases.ListProjectsOutput:
+    properties:
+      description:
+        example:
+        - lets the user register projects
+        items:
+          type: string
+        type: array
+      display:
+        example: true
+        type: boolean
+      id:
+        example: 6568ee3e7bbf5a6160f444f4
+        type: string
+      techs:
+        items:
+          $ref: '#/definitions/technologies_domain.Technology'
+        type: array
+      title:
+        example: App 1
+        type: string
+    type: object
   usecases.ListTechnologiesOutput:
     properties:
       display:
@@ -374,6 +396,20 @@ paths:
       tags:
       - Images
   /projects:
+    get:
+      description: 'This endpoint lists all projects that are marked as display: true'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/usecases.ListProjectsOutput'
+            type: array
+      summary: List projects
+      tags:
+      - Projects
     post:
       consumes:
       - application/json

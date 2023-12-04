@@ -48,14 +48,14 @@ This API is designed to improve the management of project and experience informa
   - [x] List
   - [x] Enable/Disable
 
-- [ ] Experiences:
+- [x] Experiences:
   - [x] Create
   - [x] List
   - [x] Update
 
 - [ ] Projects
-  - [ ] Create
-  - [ ] List
+  - [x] Create
+  - [x] List
   - [ ] Disable
   - [ ] Update
 

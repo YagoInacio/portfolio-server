@@ -166,6 +166,27 @@
             }
         },
         "/projects": {
+            "get": {
+                "description": "This endpoint lists all projects that are marked as display: true",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "List projects",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/usecases.ListProjectsOutput"
+                            }
+                        }
+                    }
+                }
+            },
             "post": {
                 "description": "This endpoint creates a project",
                 "consumes": [
@@ -513,6 +534,38 @@
                     "items": {
                         "$ref": "#/definitions/technologies_domain.Technology"
                     }
+                }
+            }
+        },
+        "usecases.ListProjectsOutput": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "lets the user register projects"
+                    ]
+                },
+                "display": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "id": {
+                    "type": "string",
+                    "example": "6568ee3e7bbf5a6160f444f4"
+                },
+                "techs": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/technologies_domain.Technology"
+                    }
+                },
+                "title": {
+                    "type": "string",
+                    "example": "App 1"
                 }
             }
         },

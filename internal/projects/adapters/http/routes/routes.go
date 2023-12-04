@@ -17,4 +17,7 @@ func SetupRoutes(e *echo.Group) {
 
 	create := usecases.NewCreateProjectUseCase(projectsRepository, techRepository)
 	e.POST("", handlers.NewCreateProjectHandler(*create).Handler)
+
+	list := usecases.NewListProjectsUseCase(projectsRepository)
+	e.GET("", handlers.NewListProjectsHandler(*list).Handler)
 }
